@@ -1,0 +1,56 @@
+{
+    "name": "n8n-nodes-nextforms",
+    "version": "1.0.2",
+    "description": "Nextforms for n8n: trigger a workflow from a form's Send to app step, and read forms and responses.",
+    "keywords": [
+        "n8n-community-node-package",
+        "nextforms",
+        "forms",
+        "form-builder",
+        "survey",
+        "webhook"
+    ],
+    "license": "MIT",
+    "homepage": "https://nextforms.com/docs/n8n/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Nextforms/n8n-nodes-nextforms.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Nextforms/n8n-nodes-nextforms/issues"
+    },
+    "author": {
+        "name": "Nextforms"
+    },
+    "main": "index.js",
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "scripts": {
+        "build": "tsc && node scripts/copy-icons.js",
+        "test": "npm run build && node --test test/nodes.test.js",
+        "lint": "n8n-node lint"
+    },
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "credentials": [
+            "dist/credentials/NextformsApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/Nextforms/NextformsTrigger.node.js",
+            "dist/nodes/Nextforms/Nextforms.node.js"
+        ]
+    },
+    "devDependencies": {
+        "n8n-workflow": "^2.16.0",
+        "typescript": "^5.9.0",
+        "@n8n/node-cli": "0.50.3",
+        "eslint": "^9.29.0"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}

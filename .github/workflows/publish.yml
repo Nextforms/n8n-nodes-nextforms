@@ -1,0 +1,31 @@
+# Publishes the package to npm when a GitHub release is published. npm Trusted Publishing
+# (OIDC) authenticates the run, so no npm token is stored anywhere, and --provenance
+# links the published version to this repository and workflow (n8n requires that for
+# verified community nodes).
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # Trusted Publishing needs npm 11.5 or newer.
+      - run: npm install -g npm@latest
+      - name: The release tag matches the package version
+        run: test "${GITHUB_REF_NAME#v}" = "$(node -p "require('./package.json').version")"
+      - run: npm install --no-audit --no-fund
+      - run: npm run lint
+      - run: npm test
+      - run: npm publish --provenance --access public

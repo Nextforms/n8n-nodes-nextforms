@@ -1,0 +1,17 @@
+# n8n's own security scan (provenance, source, lint) of the version on npm: the check
+# the Creator Portal runs before verifying the node. Runs on push and by hand from the
+# Actions tab; after a release, run it once npm has finished validating the version.
+name: n8n scan
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx -y @n8n/scan-community-package n8n-nodes-nextforms

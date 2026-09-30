@@ -2,7 +2,8 @@
 
 Start an n8n workflow from a [Nextforms](https://nextforms.com) form, at the point in
 the form's own workflow you choose, and read forms and responses from n8n. Works with
-self-hosted n8n and n8n cloud, with a team API key: no OAuth callback to register.
+self-hosted n8n (and n8n cloud once n8n has verified the node), with a team API key: no
+OAuth callback to register.
 
 Two nodes:
 

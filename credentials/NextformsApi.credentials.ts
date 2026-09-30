@@ -15,8 +15,8 @@ export class NextformsApi implements ICredentialType {
     name = 'nextformsApi';
     displayName = 'Nextforms API';
     icon: Icon = {
-        light: 'file:nextforms.svg',
-        dark: 'file:nextforms.dark.svg',
+        light: 'file:../nodes/Nextforms/nextforms.svg',
+        dark: 'file:../nodes/Nextforms/nextforms.dark.svg',
     };
     documentationUrl = 'https://nextforms.com/docs/n8n/';
 

@@ -1,7 +1,7 @@
 'use strict';
 
 // n8n loads an icon from beside the compiled file that names it; tsc copies nothing but
-// code. The node and the credential both use the Nextforms icon, light and dark.
+// code. The credential points at the same files in the node folder.
 const fs = require('node:fs');
 const path = require('node:path');
 

@@ -17,6 +17,7 @@ const { Nextforms } = require('../dist/nodes/Nextforms/Nextforms.node.js');
 /** A stand-in for n8n's hook context: records the requests the node would make. */
 const hookContext = ({ hookId, responses = {} } = {}) => {
     const calls = [];
+    const warnings = [];
     const data = hookId ? { hookId } : {};
     return {
         calls,
@@ -29,6 +30,8 @@ const hookContext = ({ hookId, responses = {} } = {}) => {
         getWorkflow: () => ({ name: 'Leads to CRM' }),
         getNodeWebhookUrl: () => 'https://n8n.example/webhook/abc',
         getWorkflowStaticData: () => data,
+        warnings,
+        logger: { warn: (message) => warnings.push(message) },
         helpers: {
             httpRequestWithAuthentication: async function (
                 credential,
@@ -136,6 +139,7 @@ test('deactivating unsubscribes and tolerates a hook already removed', async () 
     assert.equal(await node.webhookMethods.default.delete.call(ctx), true);
     assert.equal(ctx.calls[0].method, 'DELETE');
     assert.equal(ctx.data.hookId, undefined);
+    assert.match(ctx.warnings[0], /could not remove hook h1/);
 });
 
 test('a delivery is passed through as one item', async () => {

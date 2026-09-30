@@ -23,7 +23,7 @@ export class NextformsTrigger implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Nextforms Trigger',
         name: 'nextformsTrigger',
-        icon: 'file:nextforms.svg',
+        icon: { light: 'file:nextforms.svg', dark: 'file:nextforms.dark.svg' },
         group: ['trigger'],
         version: 1,
         subtitle: '=Form: {{$parameter["formId"]}}',
@@ -117,8 +117,13 @@ export class NextformsTrigger implements INodeType {
                             'DELETE',
                             `/v1/hooks/${data.hookId}`,
                         );
-                    } catch {
-                        // Already gone: nothing to undo.
+                    } catch (error) {
+                        // Usually already gone on the Nextforms side (revoked, removed),
+                        // which is what deactivating wants anyway; logged, not thrown, so
+                        // a stale hook never blocks deactivating the workflow.
+                        this.logger.warn(
+                            `Nextforms: could not remove hook ${String(data.hookId)}: ${(error as Error).message}`,
+                        );
                     }
                     delete data.hookId;
                 }

@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-nextforms",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Nextforms for n8n: trigger a workflow from a form's Send to app step, and read forms and responses.",
     "keywords": [
         "n8n-community-node-package",
@@ -20,7 +20,8 @@
         "url": "https://github.com/Nextforms/n8n-nodes-nextforms/issues"
     },
     "author": {
-        "name": "Nextforms"
+        "name": "Nextforms",
+        "email": "admin@nextforms.com"
     },
     "main": "index.js",
     "files": [

@@ -1,5 +1,6 @@
 import type {
     IAuthenticateGeneric,
+    Icon,
     ICredentialTestRequest,
     ICredentialType,
     INodeProperties,
@@ -13,6 +14,10 @@ import type {
 export class NextformsApi implements ICredentialType {
     name = 'nextformsApi';
     displayName = 'Nextforms API';
+    icon: Icon = {
+        light: 'file:nextforms.svg',
+        dark: 'file:nextforms.dark.svg',
+    };
     documentationUrl = 'https://nextforms.com/docs/n8n/';
 
     properties: INodeProperties[] = [

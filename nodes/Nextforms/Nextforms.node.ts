@@ -18,9 +18,10 @@ export class Nextforms implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Nextforms',
         name: 'nextforms',
-        icon: 'file:nextforms.svg',
+        icon: { light: 'file:nextforms.svg', dark: 'file:nextforms.dark.svg' },
         group: ['input'],
         version: 1,
+        usableAsTool: true,
         subtitle: '={{$parameter["operation"]}}',
         description: 'Read forms and responses from Nextforms',
         defaults: { name: 'Nextforms' },
@@ -52,7 +53,7 @@ export class Nextforms implements INodeType {
                     {
                         name: 'List Forms',
                         value: 'listForms',
-                        action: "List the team's forms",
+                        action: 'List forms',
                     },
                 ],
                 default: 'listForms',
@@ -78,7 +79,7 @@ export class Nextforms implements INodeType {
                 required: true,
                 displayOptions: { show: { operation: ['downloadFile'] } },
                 description:
-                    'The id of the response, from the Nextforms Trigger',
+                    'The ID of the response, from the Nextforms Trigger',
             },
             {
                 displayName: 'File ID',
@@ -88,7 +89,7 @@ export class Nextforms implements INodeType {
                 required: true,
                 displayOptions: { show: { operation: ['downloadFile'] } },
                 description:
-                    "The id of the file, from the question's files in the Nextforms Trigger. For a question with several files, use Split Out on its files first.",
+                    "The ID of the file, from the question's files in the Nextforms Trigger. For a question with several files, use Split Out on its files first.",
             },
             {
                 displayName: 'Put Output File in Field',
@@ -104,7 +105,7 @@ export class Nextforms implements INodeType {
                 name: 'limit',
                 type: 'number',
                 typeOptions: { minValue: 1, maxValue: 100 },
-                default: 25,
+                default: 50,
                 displayOptions: { show: { operation: ['getResponses'] } },
                 description: 'Max number of results to return',
             },

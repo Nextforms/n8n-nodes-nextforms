@@ -1,17 +1,21 @@
 'use strict';
 
-// n8n loads a node's icon from beside its compiled file; tsc copies nothing but code.
+// n8n loads an icon from beside the compiled file that names it; tsc copies nothing but
+// code. The node and the credential both use the Nextforms icon, light and dark.
 const fs = require('node:fs');
 const path = require('node:path');
 
-const from = path.join(__dirname, '..', 'nodes', 'Nextforms', 'nextforms.svg');
-const to = path.join(
-    __dirname,
-    '..',
-    'dist',
-    'nodes',
-    'Nextforms',
-    'nextforms.svg',
-);
-fs.mkdirSync(path.dirname(to), { recursive: true });
-fs.copyFileSync(from, to);
+const root = path.join(__dirname, '..');
+const icons = ['nextforms.svg', 'nextforms.dark.svg'];
+for (const dir of [
+    path.join('dist', 'nodes', 'Nextforms'),
+    path.join('dist', 'credentials'),
+]) {
+    fs.mkdirSync(path.join(root, dir), { recursive: true });
+    for (const icon of icons) {
+        fs.copyFileSync(
+            path.join(root, 'nodes', 'Nextforms', icon),
+            path.join(root, dir, icon),
+        );
+    }
+}
